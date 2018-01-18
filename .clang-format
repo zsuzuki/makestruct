@@ -1,0 +1,19 @@
+BasedOnStyle: LLVM
+UseTab: Never
+IndentWidth: 2
+BreakBeforeBraces: Allman
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+AlignConsecutiveAssignments: true
+AlignTrailingComments: true
+AlwaysBreakTemplateDeclarations: true
+ColumnLimit: 120
+Cpp11BracedListStyle: true
+AlignConsecutiveDeclarations: true
+AlignEscapedNewlinesLeft: true
+#DerivePointerAlignment: true
+PointerAlignment: Left
+
+#AllowShortIfStatementsOnAsingleLine: false
+#IndentCaseLabels: false
+#BreakConstructorInitializersBeforeComma: false
+#NamespaceIndentation: Inner

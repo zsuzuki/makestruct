@@ -1,0 +1,48 @@
+variable:
+- {name: compiler_command, value: "clang++"}
+- {name: compiler_command, value: "g++-5", type: c9}
+
+- {name: compiler, value: "${compiler_command}"}
+- {name: archiver, value: ar}
+- {name: linker,   value: "${compiler_command}"}
+
+define:
+- list:
+  debug: [ DEBUG=1 ]
+
+include:
+- list:
+  - /usr/local/include
+  - ${HOME}/workspace/cpptoml/include
+
+option:
+- list:
+  - c
+  - g3
+  - std=c++14
+  - Wall
+  - MMD
+  - MT $out
+  - MF $dep
+  debug: [ O0 ]
+  release: [ O3 ]
+
+archive_option:
+- list: [ rcs ]
+
+link_option:
+- list:
+  - g3
+  - L/usr/local/lib
+
+libraries:
+- list: [ lua ]
+- {type: c9, list: [ dl, pthread ]}
+
+source:
+- list:
+  - src/main.cpp
+
+target:
+- name: makestruct
+  type: execute
