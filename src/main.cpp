@@ -367,6 +367,13 @@ main(int argc, char** argv)
   alignment(byte_count, sizeof(unsigned));
   sout << "}; // struct size = " << byte_count << " bytes." << std::endl;
 
+  // size check
+  auto maxsize = config->get_qualified_as<size_t>("struct.maxsize");
+  if (maxsize && *maxsize < byte_count)
+  {
+    std::cerr << "warning: struct size over!: " << byte_count << "/defined: " << *maxsize << std::endl;
+  }
+
   // namespace
   if (namespace_label)
   {

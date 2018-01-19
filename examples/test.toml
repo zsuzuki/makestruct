@@ -1,7 +1,7 @@
 [struct]
 name="parameter"
 namespace="app"
-maxsize=32
+maxsize=256
 include = ["cstdint","app.h"]
 [define]
 WorkMax=100
