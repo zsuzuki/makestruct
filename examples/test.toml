@@ -9,9 +9,10 @@ name="parameter"
 maxsize=256
 
 [[struct.member]]
+comment="student's name"
 name="name"
 type="std::string"
-default="OK"
+default="A.A"
 [[struct.member]]
 name="age"
 type="uint8_t"
@@ -27,12 +28,13 @@ default="A"
 [[struct.member]]
 name="country"
 type="char"
-default="o"
+default="JP"
 array=4
 [[struct.member]]
 name="dummy"
 type="uint8_t"
 [[struct.member]]
+comment="working progress"
 name="progress"
 type="uint16_t"
 array="WorkMax"
