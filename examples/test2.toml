@@ -9,22 +9,22 @@ WorkMax=8
 
 [[member]]
 name="name" # member name
-size="char"
+type="char"
 default="--"
 array="NameMax"
 [[member]]
 name="age" # member's age
-size="uint8_t"
+type="uint8_t"
 default=16
 [[member]]
 name="height"
-size="float"
+type="float"
 default=170.5
 [[member]]
 name="grade"
-size="uint8_t"
+type="uint8_t"
 default="3"
 [[member]]
 name="party"
-size="uint8_t"
+type="uint8_t"
 default="C"

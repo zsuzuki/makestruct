@@ -272,19 +272,19 @@ main(int argc, char** argv)
   for (const auto& member : *members)
   {
     auto name = member->get_as<std::string>("name");
-    auto size = member->get_as<std::string>("size");
+    auto type = member->get_as<std::string>("type");
     auto bits = member->get_as<int>("bits");
 
     if (bits)
     {
       // bit field
-      sout << "\t" << *size << " " << *name << " : " << *bits;
+      sout << "\t" << *type << " " << *name << " : " << *bits;
       bit_count += *bits;
       byte_count += inquiry_bits(bit_count);
     }
     else
     {
-      sout << "\t" << *size << " " << *name;
+      sout << "\t" << *type << " " << *name;
 
       // array
       int  array_size = 0;
@@ -319,7 +319,7 @@ main(int argc, char** argv)
           sout << "{ " << f << *v << b << " }";
         }
       };
-      switch (check_default_type(*size, array_size))
+      switch (check_default_type(*type, array_size))
       {
       case DefaultType::String:
       {
@@ -353,7 +353,7 @@ main(int argc, char** argv)
       break;
       }
 
-      size_t single_size = calc_size(*size);
+      size_t single_size = calc_size(*type);
       byte_count += inquiry_bits(bit_count, true);
       alignment(byte_count, single_size);
       byte_count += single_size * (array_size > 0 ? array_size : 1);

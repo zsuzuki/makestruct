@@ -6,13 +6,13 @@ include = ["cstdint"]
 
 [[member]]
 name="state1"
-size="unsigned"
+type="unsigned"
 bits=2
 [[member]]
 name="state2"
-size="unsigned"
+type="unsigned"
 bits=4
 [[member]]
 name="state3"
-size="unsigned"
+type="unsigned"
 bits=1
