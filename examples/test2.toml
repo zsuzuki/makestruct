@@ -1,30 +1,32 @@
-[struct]
-name="parameter2"
-namespace="app"
-maxsize=32
 include = ["cstdint","app.h"]
+namespace="app"
+
 [define]
 NameMax=16
 WorkMax=8
 
-[[member]]
-name="name" # member name
+[struct]
+name="parameter2"
+maxsize=32
+
+[[struct.member]]
+name="name"
 type="char"
 default="--"
 array="NameMax"
-[[member]]
-name="age" # member's age
+[[struct.member]]
+name="age"
 type="uint8_t"
 default=16
-[[member]]
+[[struct.member]]
 name="height"
 type="float"
 default=170.5
-[[member]]
+[[struct.member]]
 name="grade"
 type="uint8_t"
 default="3"
-[[member]]
+[[struct.member]]
 name="party"
 type="uint8_t"
 default="C"

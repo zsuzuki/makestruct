@@ -1,18 +1,19 @@
+include = ["cstdint"]
+namespace="app"
+
 [struct]
 name="parameter3"
-namespace="app"
 maxsize=32
-include = ["cstdint"]
 
-[[member]]
+[[struct.member]]
 name="state1"
 type="unsigned"
 bits=2
-[[member]]
+[[struct.member]]
 name="state2"
 type="unsigned"
 bits=4
-[[member]]
+[[struct.member]]
 name="state3"
 type="unsigned"
 bits=1

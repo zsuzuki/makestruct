@@ -245,7 +245,7 @@ main(int argc, char** argv)
   // include guard
   auto ig_label = begin_include_guard(sout, *struct_name);
 
-  auto include_list = config->get_qualified_array_of<std::string>("struct.include");
+  auto include_list = config->get_qualified_array_of<std::string>("include");
   if (include_list)
   {
     for (const auto& i : *include_list)
@@ -258,7 +258,7 @@ main(int argc, char** argv)
   auto define_list = config->get_table_qualified("define");
 
   // namespace
-  auto namespace_label = config->get_qualified_as<std::string>("struct.namespace");
+  auto namespace_label = config->get_qualified_as<std::string>("namespace");
   if (namespace_label)
   {
     sout << "namespace " << *namespace_label << " {" << std::endl;
@@ -268,7 +268,7 @@ main(int argc, char** argv)
   size_t byte_count = 0;
   size_t bit_count  = 0;
   sout << "struct " << *struct_name << " {" << std::endl;
-  auto members = config->get_table_array("member");
+  auto members = config->get_table_array_qualified("struct.member");
   for (const auto& member : *members)
   {
     auto name = member->get_as<std::string>("name");
