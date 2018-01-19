@@ -3,6 +3,7 @@
 //
 #include <cpptoml.h>
 #include <cstdint>
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -140,6 +141,60 @@ alignment(size_t& byte_count, size_t single_size)
   byte_count += remain_size > align_size ? align_size : 0;
 }
 
+//////////
+//
+//
+bool
+file_exist(std::string& fname)
+{
+  std::ifstream ifs(fname);
+  return ifs.is_open();
+}
+
+//////////
+//
+//
+void
+error_exit(std::string msg)
+{
+  std::cerr << "error: " << msg << std::endl;
+  exit(1);
+}
+
+//////////
+//
+//
+int
+option_check(int argc, char** argv, std::string& output_filename)
+{
+  int ipos = 1;
+  for (int ai = 1; ai < argc; ++ai)
+  {
+    if (strncmp(argv[ai], "-o", 3) == 0)
+    {
+      // output file
+      if (++ai < argc)
+      {
+        output_filename = argv[ai];
+      }
+      else
+      {
+        error_exit("argument error: no output filename");
+      }
+    }
+    else
+    {
+      break;
+    }
+    ipos = ai + 1;
+  }
+  if (ipos >= argc)
+  {
+    error_exit("no set config file");
+  }
+  return ipos;
+}
+
 } // namespace
 
 //////////
@@ -154,18 +209,37 @@ main(int argc, char** argv)
     return -1;
   }
 
-  std::ostream& sout = std::cout;
+  // option & filenames
+  std::string output_filename;
+  int         ipos = option_check(argc, argv, output_filename);
+  std::string input_filename{argv[ipos]};
+  if (file_exist(input_filename) == false)
+  {
+    error_exit(std::string{"file not found: "} + input_filename);
+  }
+
+  // output file
+  std::unique_ptr<std::ofstream> outfile{};
+  if (output_filename.empty() == false)
+  {
+    auto newfile = std::make_unique<std::ofstream>(output_filename);
+    outfile      = std::move(newfile);
+    if (outfile->is_open() == false)
+    {
+      error_exit(std::string{"file open failed: "} + output_filename);
+    }
+  }
+  std::ostream& sout = outfile ? *outfile : std::cout;
 
   //
-  std::cout << "input config file: " << argv[1] << std::endl;
-  auto config = cpptoml::parse_file(argv[1]);
+  sout << "// input config file: " << input_filename << std::endl;
+  auto config = cpptoml::parse_file(input_filename);
 
   //
   auto struct_name = config->get_qualified_as<std::string>("struct.name");
   if (!struct_name)
   {
-    std::cerr << "not found {struct.name}" << std::endl;
-    return -1;
+    error_exit("not found {struct.name}");
   }
 
   // include guard
@@ -193,7 +267,7 @@ main(int argc, char** argv)
   // struct body
   size_t byte_count = 0;
   size_t bit_count  = 0;
-  std::cout << "struct " << *struct_name << " {" << std::endl;
+  sout << "struct " << *struct_name << " {" << std::endl;
   auto members = config->get_table_array("member");
   for (const auto& member : *members)
   {
