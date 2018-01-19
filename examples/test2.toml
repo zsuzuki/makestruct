@@ -1,0 +1,30 @@
+[struct]
+name="parameter2"
+namespace="app"
+maxsize=32
+include = ["cstdint","app.h"]
+[define]
+NameMax=16
+WorkMax=8
+
+[[member]]
+name="name" # member name
+size="char"
+default="--"
+array="NameMax"
+[[member]]
+name="age" # member's age
+size="uint8_t"
+default=16
+[[member]]
+name="height"
+size="float"
+default=170.5
+[[member]]
+name="grade"
+size="uint8_t"
+default="3"
+[[member]]
+name="party"
+size="uint8_t"
+default="C"

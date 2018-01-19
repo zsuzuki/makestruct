@@ -1,0 +1,18 @@
+[struct]
+name="parameter3"
+namespace="app"
+maxsize=32
+include = ["cstdint"]
+
+[[member]]
+name="state1"
+size="unsigned"
+bits=2
+[[member]]
+name="state2"
+size="unsigned"
+bits=4
+[[member]]
+name="state3"
+size="unsigned"
+bits=1
